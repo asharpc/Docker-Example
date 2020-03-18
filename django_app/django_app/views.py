@@ -1,8 +1,8 @@
 from django.shortcuts import render
-
+from django.http import HttpResponse
 def home(request):
-    return render(request, "<h1>my docker</h1>")
+    return HttpResponse("<h1>my docker</h1>")
    
 def page(request):
-    return render(request, "<h3>...............first page.................</h3>")
+    return HttpResponse("<h3>my docker</h3>")
    
