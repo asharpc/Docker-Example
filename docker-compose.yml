@@ -27,7 +27,7 @@ services:
     depends_on:
         - db
 
-  app1:
+  app2:
     build: ./django_app
     container_name: django-gunicorn2
     restart: always
@@ -52,6 +52,7 @@ services:
       - ./nginx:/etc/nginx/conf.d
     depends_on:
       - app1
+      - app2
 
 volumes:
     app1_data:
