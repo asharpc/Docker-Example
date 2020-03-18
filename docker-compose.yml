@@ -22,15 +22,15 @@ services:
         - "5432"
       environment:   # will be used by the init script
             LC_ALL: C.UTF-8
-            POSTGRES_USER: 'postgres'
-            POSTGRES_PASSWORD: 'postgres123'.
-            POSTGRES_DB: 'mydb'
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres123
+            POSTGRES_DB: mydb
       volumes:
           - pgdata:/var/lib/postgresql/data/  
 
   nginx:
       restart: always
-      build: ./nginx
+      build: ./ngnix
       volumes: 
         - ./nginx/:/etc/nginx/conf.d
         - ./logs/:/code/logs
