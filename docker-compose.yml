@@ -16,7 +16,7 @@ services:
       command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn --workers=3 django_app.wsgi:application -b 0.0.0.0:8080"
 
   postgres:
-      build: ./postgres
+      build: postgres
       restart: unless-stopped
       expose:
         - "5432"
