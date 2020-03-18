@@ -1,7 +1,6 @@
 version: '3'
-services: 
 
-  
+services: 
 
   db:
       build: postgres
@@ -16,7 +15,7 @@ services:
 
   nginx:
       restart: always
-      build: ./nginx
+      build: ./ngnix
       volumes: 
         - ./nginx/:/etc/nginx/conf.d
         - ./logs/:/code/logs

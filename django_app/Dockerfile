@@ -4,10 +4,10 @@ LABEL maintainer Asarudheen
 
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /src/app
+RUN mkdir /django_app
 
-WORKDIR /src/app
+WORKDIR /django_app
 
-COPY . /src/app
+COPY . /django_app
 
 RUN pip install -r requirements.txt
