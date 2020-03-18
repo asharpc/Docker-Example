@@ -3,8 +3,8 @@ services:
 
   web:
 
-      build: .
-      container_name: django-app
+      build: ./django_app
+      container_name: app
       volumes: 
       - .:/code
       - static:/code/static_cdn
@@ -13,7 +13,7 @@ services:
           - postgres
       expose: 
         - 8080
-      command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn --workers=3 projectname.wsgi -b 0.0.0.0:8080"
+      command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn --workers=3 django_app.wsgi:application -b 0.0.0.0:8080"
 
   postgres:
       build: ./postgres
@@ -22,24 +22,26 @@ services:
         - "5432"
       environment:   # will be used by the init script
             LC_ALL: C.UTF-8
-            POSTGRES_USER: myuser
-            POSTGRES_PASSWORD: mypassowrd.
-            POSTGRES_DB: mydb
+            POSTGRES_USER: 'postgres'
+            POSTGRES_PASSWORD: 'postgres123'.
+            POSTGRES_DB: 'mydb'
       volumes:
           - pgdata:/var/lib/postgresql/data/  
 
   nginx:
       restart: always
-      build: ./nginx/
+      build: ./nginx
       volumes: 
         - ./nginx/:/etc/nginx/conf.d
         - ./logs/:/code/logs
         - static:/code/static_cdn
         - media:/code/media_cdn
       ports: 
-        - "1221:80"
+        - "80:80"
       links:
-        - web  
+        - web 
+      depends_on:
+        - web 
 volumes: 
   pgdata:
   media:

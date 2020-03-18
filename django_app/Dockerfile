@@ -1,10 +1,13 @@
-FROM python:3.6
+FROM python:3.6.2
 
-RUN mkdir /code
-WORKDIR /code
+LABEL maintainer Asarudheen
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+ENV PYTHONUNBUFFERED 1
 
+RUN mkdir /src/app
 
-COPY . .
+WORKDIR /src/app
+
+COPY . /src/app
+
+RUN pip install -r requirements.txt
